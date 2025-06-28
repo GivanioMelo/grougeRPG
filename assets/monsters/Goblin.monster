@@ -1,0 +1,65 @@
+﻿{
+	"Name": "Goblin",
+	"Description": "",
+	"SpriteFile": "goblin.png",
+
+	"MaxHP": 10,
+	"Armor": 13,
+	"ViewRadius": 10,
+	"MaxMovement": 4,
+	"ExperienceReward": 3,
+
+	"Attacks": [
+		{
+			"Name": "Dagger Stabbing",
+			"Accuracy": 4,
+			"MinDamage": 3,
+			"MaxDamage": 6,
+			"Range": 1.5,
+			"DamageType": "piercing",
+			"Cooldown": 0
+		},
+		{
+			"Name": "Throw Rock",
+			"Accuracy": 4,
+			"MinDamage": 1,
+			"MaxDamage": 2,
+			"Range": 5,
+			"DamageType": "bludgeoning",
+			"Cooldown": 5
+		}
+	],
+
+	"Loot": [
+		{
+			"itemName": "Roten food",
+			"minQuantity": 1,
+			"maxQuantity": 3,
+			"probabolity": 0.8
+		},
+		{
+			"itemName": "Coper coin",
+			"minQuantity": 3,
+			"maxQuantity": 5,
+			"probabolity": 1
+		},
+		{
+			"itemName": "Scrapp Wood",
+			"minQuantity": 1,
+			"maxQuantity": 3,
+			"probabolity": 0.8
+		},
+		{
+			"itemName": "Rusty Dagger",
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"probabolity": 0.5
+		},
+		{
+			"itemName": "Makeshift Poison",
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"probabolity": 0.01
+		}
+	]
+}

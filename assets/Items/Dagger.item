@@ -1,0 +1,28 @@
+﻿{
+	"name": "Dagger",
+	"sprite": "Dagger.png",
+	"weight": 0.2,
+
+	"attackBonus": 0,
+	"deffenseBonus": 0,
+
+	"minDamage": 1,
+	"maxDamage": 4,
+
+	"scalesWith": "Str,Dex",
+
+	"recipe": [
+		{
+			"ingredient": "iron ingot",
+			"quantity": 2
+		},
+		{
+			"ingredient": "wood plank",
+			"quantity": "1"
+		},
+		{
+			"ingredient": "leather strap",
+			"quantity": "1"
+		}
+	]
+}

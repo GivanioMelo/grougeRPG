@@ -1,0 +1,30 @@
+﻿{
+  "Name": "Goblin",
+  "Description": "",
+  "SpriteFile": "goblin.png",
+  "Level": 1,
+  "MaxHP": 10,
+  "ViewRadius": 15,
+  "AttackPower": 3,
+  "DefensePower": 1,
+  "Range": 0,
+  "MaxMovement": 4,
+  "ExperienceReward": 10,
+  "skills": [],
+
+  "loot": [
+	{ "itemName": "Roten food", "minQuantity": 1, "maxQuantity": 3, "probabolity": 0.8 },
+	{ "itemName": "Coper coin", "minQuantity": 3, "maxQuantity": 5, "probabolity": 1 },
+	{ "itemName": "Scrapp Wood", "minQuantity": 1, "maxQuantity": 3, "probabolity": 0.8 },
+	{ "itemName": "Dagger", "minQuantity": 1, "maxQuantity": 1, "probabolity": 0.5 },
+	{ "itemName": "Makeshift Poison", "minQuantity": 1, "maxQuantity": 1, "probabolity": 0.01 }
+  ],
+
+  "Strenght": 11,
+  "Dexterity": 13,
+  "Vitality": 12,
+  "Inteligence": 6,
+
+  "Armor": null,
+  "Weapon": "Dagger"
+}

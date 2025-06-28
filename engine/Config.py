@@ -1,0 +1,6 @@
+TILE_SIZE = 64
+
+CAMERA_WIDTH = 15
+CAMERA_HEIGHT = 11
+
+ANIMATIONS_FOLDER = "assets/animations"

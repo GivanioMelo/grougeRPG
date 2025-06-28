@@ -1,0 +1,65 @@
+﻿{
+  "Name": "Goblin Captain",
+  "Description": "",
+  "SpriteFile": "goblin.png",
+
+  "MaxHP": 15,
+  "Armor": 15,
+  "ViewRadius": 10,
+  "MaxMovement": 4,
+  "ExperienceReward": 15,
+
+  "Attacks": [
+    {
+      "Name": "Morning Star Strike",
+      "Accuracy": 4,
+      "MinDamage": 3,
+      "MaxDamage": 10,
+      "Range": 1.5,
+      "DamageType": "bludgeoning",
+      "Cooldown": 0
+    },
+    {
+      "Name": "Short Bow Shoot",
+      "Accuracy": 4,
+      "MinDamage": 1,
+      "MaxDamage": 6,
+      "Range": 8,
+      "DamageType": "piercing",
+      "Cooldown": 5
+    }
+  ],
+
+  "Loot": [
+    {
+      "itemName": "Roten food",
+      "minQuantity": 1,
+      "maxQuantity": 3,
+      "probabolity": 0.8
+    },
+    {
+      "itemName": "Coper coin",
+      "minQuantity": 5,
+      "maxQuantity": 10,
+      "probabolity": 1
+    },
+    {
+      "itemName": "Scrapp Wood",
+      "minQuantity": 1,
+      "maxQuantity": 3,
+      "probabolity": 0.8
+    },
+    {
+      "itemName": "Morning Star",
+      "minQuantity": 1,
+      "maxQuantity": 1,
+      "probabolity": 0.1
+    },
+    {
+      "itemName": "Makeshift Poison",
+      "minQuantity": 1,
+      "maxQuantity": 1,
+      "probabolity": 0.01
+    }
+  ]
+}

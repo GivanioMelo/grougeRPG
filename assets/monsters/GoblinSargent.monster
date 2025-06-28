@@ -1,0 +1,65 @@
+﻿{
+  "Name": "Goblin",
+  "Description": "",
+  "SpriteFile": "goblin.png",
+  
+  "MaxHP": 10,
+  "Armor": 15,
+  "ViewRadius": 10,
+  "MaxMovement": 4,
+  "ExperienceReward": 10,
+
+  "Attacks": [
+    {
+      "Name": "Scimitar Cut",
+      "Accuracy": 4,
+      "MinDamage": 3,
+      "MaxDamage": 8,
+      "Range": 1.5,
+      "DamageType": "slashing",
+      "Cooldown": 0
+    },
+    {
+      "Name": "Throw Rock",
+      "Accuracy": 4,
+      "MinDamage": 1,
+      "MaxDamage": 2,
+      "Range": 5,
+      "DamageType": "bludgeoning",
+      "Cooldown": 5
+    }
+  ],
+
+  "Loot": [
+    {
+      "itemName": "Roten food",
+      "minQuantity": 1,
+      "maxQuantity": 3,
+      "probabolity": 0.8
+    },
+    {
+      "itemName": "Coper coin",
+      "minQuantity": 3,
+      "maxQuantity": 5,
+      "probabolity": 1
+    },
+    {
+      "itemName": "Scrapp Wood",
+      "minQuantity": 1,
+      "maxQuantity": 3,
+      "probabolity": 0.8
+    },
+    {
+      "itemName": "Scimitar",
+      "minQuantity": 1,
+      "maxQuantity": 1,
+      "probabolity": 0.01
+    },
+    {
+      "itemName": "Makeshift Poison",
+      "minQuantity": 1,
+      "maxQuantity": 1,
+      "probabolity": 0.01
+    }
+  ]
+}
