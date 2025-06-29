@@ -5,11 +5,15 @@ import pygame
 from engine.Animation import Animation
 from engine.Camera import Camera
 
-from engine.GameObject import GridGameObject
+from engine.character.Character import Character
+from engine.interactions.quest import Quest
 
-class Player(GridGameObject):
+class Player(Character):
 	idleAnimation:Animation
 	animation:Animation
+
+	activeQuests:list[Quest]
+	completedQuests:list[Quest]
 
 	def __init__(self, x, y) -> None:
 		super().__init__()

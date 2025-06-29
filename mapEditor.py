@@ -5,7 +5,6 @@ import numpy as np
 import pygame
 
 from engine.Camera import Camera
-
 import engine.Config as config
 
 map = np.zeros((100,100))
