@@ -2,6 +2,7 @@ import pygame
 
 import engine.sprites as sprites
 
+from engine.ui.Component import Component
 from engine.ui.Buttons import Button
 
 _v_scroll_texture_ = pygame.image.load("assets/ui/v_scroll.png")
@@ -40,32 +41,46 @@ class ScrollBarCursorButton(Button):
         self.texture = sprites.scrollBarCursorButton
         self.pressedTexture = sprites.scrollBarCursorButton_pressed
         
-class ScrollBar:
-    def __init__(self,x,y,lenght,orientation, minValue=0, maxValue=100):
-        self.x = x
-        self.y = y
+class ScrollBar(Component):
+    """
+    Custom scroll bar.
+
+    Initialization parameters (kwargs):
+        x (int, optional): X position of the scroll bar. Default: 0.
+        y (int, optional): Y position of the scroll bar. Default: 0.
+        lenght (int, optional): Length of the scroll bar (height if vertical, width if horizontal). Default: 100.
+        minValue (int/float, optional): Minimum scroll value. Default: 0.
+        maxValue (int/float, optional): Maximum scroll value. Default: 100.
+        value (int/float, optional): Initial scroll value. Default: 0.
+        orientation (int, optional): Bar orientation (VERTICAL=0, HORIZONTAL=1). Default: VERTICAL.
+    """
+    def __init__(self,**kwargs):
+        self.x = kwargs.get('x', 0)
+        self.y = kwargs.get('y', 0)
         
-        self.lenght = lenght-12
+        self.lenght = kwargs.get('lenght', 100) -12
 
-        self.cursor = minValue
-        self.minValue = minValue
-        self.maxValue = maxValue
+        self.minValue = kwargs.get('minValue', 0)
+        self.maxValue = kwargs.get('maxValue', 100)
+        self.value = kwargs.get('value', 0)
 
-        self.orientation = orientation
+        if self.value < self.minValue: self.value = self.minValue
+        if self.value > self.maxValue: self.value = self.maxValue
 
-        self.cursorButton = ScrollBarCursorButton(x,y)
+        self.orientation = kwargs.get('orientation', VERTICAL)
+        self.cursorButton = ScrollBarCursorButton(self.x,self.y)
 
-        if orientation == VERTICAL:
+        if self.orientation == VERTICAL:
             self.width = 12
-            self.height = lenght
-            self.startButton = v_ScrollBarStartButton(x, y)
-            self.endButton = v_ScrollBarEndButton(x, y + lenght-12)
+            self.height = self.lenght+12
+            self.startButton = v_ScrollBarStartButton(self.x, self.y)
+            self.endButton = v_ScrollBarEndButton(self.x, self.y + self.lenght - 12)
             self.backGroundTexture = _v_scroll_texture_
         else:
             self.height = 12
-            self.width = lenght
-            self.startButton = h_ScrollBarStartButton(x, y)
-            self.endButton = h_ScrollBarEndButton(x + lenght-12,y)
+            self.width = self.lenght+12
+            self.startButton = h_ScrollBarStartButton(self.x, self.y)
+            self.endButton = h_ScrollBarEndButton(self.x + self.lenght - 12, self.y)
             self.backGroundTexture = _h_scroll_texture_
     
     def update(self):
@@ -73,35 +88,31 @@ class ScrollBar:
         self.endButton.update()
         self.cursorButton.update()
 
-        if (self.startButton.justPressed): self.cursor -= 1
-        if (self.endButton.justPressed): self.cursor += 1
+        if (self.startButton.justPressed): self.value -= 1
+        if (self.endButton.justPressed): self.value += 1
         
         if self.cursorButton.pressed:
             mdx,mdy = pygame.mouse.get_rel()
             if self.cursorButton.wasPressed:
-                if self.orientation == VERTICAL: self.cursor += (mdy / self.height) * (self.maxValue - self.minValue)
-                if self.orientation == HORIZONTAL: self.cursor += (mdx / self.width) * (self.maxValue - self.minValue)
+                if self.orientation == VERTICAL: self.value += (mdy / self.height) * (self.maxValue - self.minValue)
+                if self.orientation == HORIZONTAL: self.value += (mdx / self.width) * (self.maxValue - self.minValue)
 
-        if self.cursor < self.minValue: self.cursor = self.minValue
-        if self.cursor > self.maxValue: self.cursor = self.maxValue
+        if self.value < self.minValue: self.value = self.minValue
+        if self.value > self.maxValue: self.value = self.maxValue
         
-        
-
-    
-    def draw(self, screen:pygame.Surface):
+    def draw(self, surface:pygame.Surface):
         if self.lenght < 12: return
 
-        screen.blit(pygame.transform.scale(self.backGroundTexture, (self.width,self.height)),(self.x,self.y))
+        surface.blit(pygame.transform.scale(self.backGroundTexture, (self.width,self.height)),(self.x,self.y))
         
-        cursorOffset = (((self.cursor - self.minValue) / self.maxValue) * (self.lenght - 24)) + 12
+        cursorOffset = (((self.value - self.minValue) / self.maxValue) * (self.lenght - 24)) + 12
         self.cursorButton.x = self.x
         self.cursorButton.y = self.y
 
         if self.orientation == VERTICAL: self.cursorButton.y += cursorOffset
         if self.orientation == HORIZONTAL: self.cursorButton.x += cursorOffset
 
-        self.cursorButton.draw(screen)
-
-        self.startButton.draw(screen)
-        self.endButton.draw(screen)
+        self.cursorButton.draw(surface)
+        self.startButton.draw(surface)
+        self.endButton.draw(surface)
 

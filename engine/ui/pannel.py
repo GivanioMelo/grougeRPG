@@ -1,22 +1,19 @@
 import pygame
 import engine.sprites as sprites
+from engine.ui.Component import Component
 
 _spriteSheet_= sprites.load("assets/ui/PanelTemplate.png",3,3)
 
-class Pannel:
-	x:float
-	y:float
-	width:float
-	height:float
-	
+class Pannel(Component):	
 	_renderingBuffer_:pygame.Surface
 
-	def __init__(self, x:float = 0, y:float=0, width:float=100, height:float=100):
-		self.x = x
-		self.y = y
-		self.width = width
-		self.height = height
-		self.render()
+	def __init__(self, **kwargs):
+		self.x = kwargs.get('x', 0)
+		self.y = kwargs.get('y', 0)
+		self.width = kwargs.get('width', 100)
+		self.height = kwargs.get('height', 100)
+		self._renderingBuffer_ = None
+		self.preRender()
 
 	def draw(self,screen):
 		if(self._renderingBuffer_ == None):
@@ -24,8 +21,7 @@ class Pannel:
 			return
 		screen.blit(self._renderingBuffer_,(self.x,self.y))
 
-	def render(self):
-		self._renderingBuffer_ = None
+	def preRender(self):
 		if(_spriteSheet_ == None): print("no spritesheet"); return
 		if(len(_spriteSheet_) < 3): print("no spritesheet");  return
 		if(len(_spriteSheet_[0]) < 3): print("no spritesheet");  return

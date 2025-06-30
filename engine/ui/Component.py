@@ -6,13 +6,13 @@ class Component:
 	__width:float
 	__height:float
 
-	def __init__(self, x:float = 0, y:float=0, width:float=0, height:float=0):
-		self.__x = x
-		self.__y = y
-		self.__width = width
-		self.__height = height
-
-		self.parent = None
+	def __init__(self, **kwargs):
+		self.__x = kwargs.get('x', 0.0)
+		self.__y = kwargs.get('y', 0.0)
+		self.__width = kwargs.get('width', 100.0)
+		self.__height = kwargs.get('height', 100.0)
+		self.parent = kwargs.get('parent', None)
+		self.visible = kwargs.get('visible', True)
 	
 	def get_x(self): return self.__x
 	def set_x(self,value): self.__x = value
@@ -27,7 +27,15 @@ class Component:
 	def set_height(self,value): self.__height = value
 
 	def update(self):
+		# This class is intended to be a base class, so it doesn't implement any specific update logic.
+		# Instead, it provides a default update method that does nothing.
+		# Subclasses should override this method to implement specific update behavior.
 		pass
 
 	def draw(self,surface:pygame.Surface):
-		pass
+		if not self.visible: return
+		if self.__width <= 0 or self.__height <= 0: return
+		# This class is intended to be a base class, so it doesn't implement any specific drawing logic.
+		# Instead, it provides a default drawing method that fills the area with white.
+		# Subclasses should override this method to implement specific drawing behavior.
+		surface.fill((255, 255, 255), (self.__x, self.__y, self.__width, self.__height))

@@ -27,9 +27,9 @@ class Button:
 		self.justPressed = (self.pressed and not self.wasPressed)
 		self.justReleased = (self.wasPressed and not self.pressed)
 
-	def draw(self, screen):
-		if self.pressed: screen.blit(self.pressedTexture,(self.x,self.y))
-		else: screen.blit(self.texture,(self.x,self.y))
+	def draw(self, surface:pygame.Surface):
+		if self.pressed: surface.blit(self.pressedTexture,(self.x,self.y))
+		else: surface.blit(self.texture,(self.x,self.y))
 
 class ToggleButton(Button):
 	def __init__(self, x, y, toggled=False):

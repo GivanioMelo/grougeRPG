@@ -19,16 +19,16 @@ GRAY = (100, 100, 100)
 BLACK = (0, 0, 0)
 
 pannels = []
-pannels.append(Pannel(10,10,150,50))
-pannels.append(Pannel(10,70,70,50))
-pannels.append(Pannel(90,70,70,50))
-pannels.append(Pannel(10,130,150,70))
+pannels.append(Pannel(x=10,y=10,width=150,height=50))
+pannels.append(Pannel(x=10,y=70,width=70,height=50))
+pannels.append(Pannel(x=90,y=70,width=70,height=50))
+pannels.append(Pannel(x=10,y=130,width=150,height=50))
 
 windows = []
-windows.append(Window(450,450,50,50))
-windows.append(Window(450,10,150,150,True,True))
-windows.append(Window(450,180,90,70,False,True))
-windows.append(Window(600,180,50,90,True,False))
+windows.append(Window(x=10,y=10,width=150,height=150,vScrollBar=True,hScrollBar=False))
+windows.append(Window(x=450,y=10,width=150,height=150,vScrollBar=False,hScrollBar=True))
+windows.append(Window(x=450,y=180,width=90,height=70,vScrollBar=True,hScrollBar=True))
+windows.append(Window(x=600,y=180,width=50,height=90,vScrollBar=True,hScrollBar=False))
 
 windows.append(TextWindow(170,10,text="Hello\nWelcome to Quests\nThis is my very first game...", title="Message"))
 windows.append(InventoryWindow(170,90,4,4, title="Chest"))

@@ -9,12 +9,12 @@ _windowSpriteSheet_ = sprites.load("assets/ui/windowTexture.png",3,3)
 _titleFont = pygame.font.SysFont("Consolas", 12,bold=True)
 
 class _WindowCloseButton(Button):
-    def __init__(self, x, y):
-        super().__init__(x, y)
-        self.texture = sprites.window_CloseButton
-        self.pressedTexture = sprites.window_CloseButton_pressed
+	def __init__(self, x, y):
+		super().__init__(x, y)
+		self.texture = sprites.window_CloseButton
+		self.pressedTexture = sprites.window_CloseButton_pressed
 
-class Window():
+class Window(Container):
 	visible:bool
 	title:str
 
@@ -25,10 +25,10 @@ class Window():
 
 	closeButton: _WindowCloseButton
 
-	vScrollBar:bool
+	hasVerticalScrollBar:bool
 	verticalScrollBar:ScrollBar
 
-	hScrollBar:bool
+	hasHorizontalScrollBar:bool
 	horizontalScrollBar:ScrollBar
 
 	_renderingBuffer_:pygame.Surface
@@ -36,51 +36,48 @@ class Window():
 	_isPressed_:bool
 	_wasPressed_:bool
 
-	def __init__(self,
-			  x:float = 0,
-			  y:float=0,
-			  width:float=100,
-			  height:float=100,
-			  vScrollBar = False,
-			  hScrollBar=False,
-			  hasCloseButton = True,
-			  title:str = ""):
-		self.title = title
-		self.visible = True
-		self.x = x
-		self.y = y
-		self.width = width
-		self.height = height
+	def __init__(self, **kwargs):
+		super().__init__(**kwargs)
+		self.title = kwargs.get('title', "")
+		self.visible = kwargs.get('visible', True)
+		# self.x = kwargs.get('x', 0)
+		# self.y = kwargs.get('y', 0)
+		# self.width = kwargs.get('width', 100)
+		# self.height = kwargs.get('height', 100)
 
 		self._isPressed_ = False
 		self._wasPressed_= False
 
+		self.hasVerticalScrollBar = kwargs.get('vScrollBar', False)
+		self.hasHorizontalScrollBar = kwargs.get('hScrollBar', False)
+		self.hasCloseButton = kwargs.get('hasCloseButton', True)
+
 		self.verticalScrollBar = None
-		self.vScrollBar = vScrollBar
 		self.horizontalScrollBar = None
-		self.hScrollBar = hScrollBar
 		self.closeButton = None
-		self.hasCloseButton = hasCloseButton
+
 		self.placeComponents()
 		self.preRender()
 
 	def placeComponents(self):
-		if(self.vScrollBar):
-			self.verticalScrollBar = ScrollBar(self.x+self.width-16,self.y+16,self.height-20,VERTICAL)
-		if(self.hScrollBar):
-			self.horizontalScrollBar = ScrollBar(self.x+4,self.y+self.height-16,self.width-8,HORIZONTAL)
-			if(self.verticalScrollBar): self.verticalScrollBar = ScrollBar(self.x+self.width-16,self.y+16,self.height-32,VERTICAL)
-		if self.hasCloseButton: self.closeButton = _WindowCloseButton(self.x+self.width-16, self.y+2)
+		self.getChildren().clear()
+		if(self.hasVerticalScrollBar):
+			self.verticalScrollBar = ScrollBar(self.width-16,16,self.height-20,VERTICAL)
+			self.addChild(self.verticalScrollBar)
+		if(self.hasHorizontalScrollBar):
+			self.horizontalScrollBar = ScrollBar(4,self.height-16,self.width-8,HORIZONTAL)
+			self.addChild(self.horizontalScrollBar)
+			if(self.verticalScrollBar):
+				self.verticalScrollBar.set_height(self.height-32)
+		if self.hasCloseButton:
+			self.closeButton = _WindowCloseButton(self.width-16, 2)
+			self.addChild(self.closeButton)
 
 	def update(self):
 		if not self.visible: return
-		
+		super().update()
 		if(self.closeButton):
-			self.closeButton.update()
 			if(self.closeButton.justReleased): self.visible = False
-
-		if(self.verticalScrollBar):self.verticalScrollBar.update()
-		if(self.horizontalScrollBar):self.horizontalScrollBar.update()
 		
 		self._wasPressed_ = self._isPressed_
 		mouseButtons= pygame.mouse.get_pressed()
@@ -98,17 +95,16 @@ class Window():
 				self.y += mdy
 				self.placeComponents()
 
-
-	def draw(self,screen):
+	def draw(self,surface:pygame.Surface):
 		if not self.visible: return
-		
 		if(self._renderingBuffer_ == None):
 			print('no buffer rendered')
 			return
-		screen.blit(self._renderingBuffer_,(self.x,self.y))
-		self.closeButton.draw(screen)
-		if(self.verticalScrollBar):self.verticalScrollBar.draw(screen)
-		if(self.horizontalScrollBar):self.horizontalScrollBar.draw(screen)
+		surface.blit(self._renderingBuffer_,(self.x,self.y))
+		super().draw(surface)
+		# self.closeButton.draw(surface)
+		# if(self.verticalScrollBar):self.verticalScrollBar.draw(surface)
+		# if(self.horizontalScrollBar):self.horizontalScrollBar.draw(surface)
 
 
 	def preRender(self):
