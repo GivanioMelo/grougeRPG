@@ -29,5 +29,5 @@ class Component:
 	def update(self):
 		pass
 
-	def draw(self,screen:pygame.Surface):
+	def draw(self,surface:pygame.Surface):
 		pass
