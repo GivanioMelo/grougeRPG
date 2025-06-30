@@ -1,6 +1,5 @@
 from math import floor
 import os
-import tkinter
 import numpy as np
 import pygame
 

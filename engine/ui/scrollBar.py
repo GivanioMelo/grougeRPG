@@ -2,7 +2,7 @@ import pygame
 
 import engine.sprites as sprites
 
-from engine.ui.button import Button
+from engine.ui.Buttons import Button
 
 _v_scroll_texture_ = pygame.image.load("assets/ui/v_scroll.png")
 _h_scroll_texture_ = pygame.image.load("assets/ui/h_scroll.png")

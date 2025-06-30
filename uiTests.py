@@ -1,11 +1,11 @@
 import pygame
 pygame.init()
 
-from engine.ui.pannel import Pannel
-from engine.ui.window import InventoryWindow, Window,TextWindow
-from engine.ui.button import Button
-from engine.ui.button import ToggleButton
-from engine.ui.scrollBar import ScrollBar,HORIZONTAL,VERTICAL
+from engine.ui.Pannel import Pannel
+from engine.ui.Windows import InventoryWindow, Window,TextWindow
+from engine.ui.Buttons import Button
+from engine.ui.Buttons import ToggleButton
+from engine.ui.ScrollBar import ScrollBar,HORIZONTAL,VERTICAL
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720

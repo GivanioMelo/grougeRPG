@@ -1,8 +1,9 @@
 import pygame
 import engine.sprites as sprites
 
-from engine.ui.button import Button
-from engine.ui.scrollBar import ScrollBar, HORIZONTAL,VERTICAL
+from engine.ui.Buttons import Button
+from engine.ui.Container import Container
+from engine.ui.ScrollBar import ScrollBar, HORIZONTAL,VERTICAL
 
 _windowSpriteSheet_ = sprites.load("assets/ui/windowTexture.png",3,3)
 _titleFont = pygame.font.SysFont("Consolas", 12,bold=True)
@@ -13,7 +14,7 @@ class _WindowCloseButton(Button):
         self.texture = sprites.window_CloseButton
         self.pressedTexture = sprites.window_CloseButton_pressed
 
-class Window:
+class Window():
 	visible:bool
 	title:str
 
@@ -147,7 +148,6 @@ class Window:
 		self._renderingBuffer_.blit(_windowSpriteSheet_[2][2], (self.width-spriteWidth,self.height-spriteHeight))
 
 		self._renderingBuffer_.blit(_titleFont.render(self.title,True,(255,255,255)),(4,4))
-
 
 _contentFont = pygame.font.SysFont("Consolas", 12)
 class TextWindow(Window):
