@@ -1,10 +1,10 @@
 import pygame
 import engine.sprites as sprites
+from engine.ui.Component import Component
 
-class Button:
+class Button(Component):
 	def __init__(self,x,y):
-		self.x = x
-		self.y = y
+		super().__init__(x=x, y=y, width=12, height=12)
 		self.texture = sprites.defaultButton
 		self.pressedTexture = sprites.defaultButton_pressed
 		self.pressed = False

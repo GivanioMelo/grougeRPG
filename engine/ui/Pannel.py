@@ -2,8 +2,6 @@ import pygame
 import engine.sprites as sprites
 from engine.ui.Component import Component
 
-_spriteSheet_= sprites.load("assets/ui/PanelTemplate.png",3,3)
-
 class Pannel(Component):	
 	_renderingBuffer_:pygame.Surface
 
@@ -22,14 +20,14 @@ class Pannel(Component):
 		screen.blit(self._renderingBuffer_,(self.x,self.y))
 
 	def preRender(self):
-		if(_spriteSheet_ == None): print("no spritesheet"); return
-		if(len(_spriteSheet_) < 3): print("no spritesheet");  return
-		if(len(_spriteSheet_[0]) < 3): print("no spritesheet");  return
+		if(sprites._pannelSpriteSheet_ == None): print("no spritesheet"); return
+		if(len(sprites._pannelSpriteSheet_) < 3): print("no spritesheet");  return
+		if(len(sprites._pannelSpriteSheet_[0]) < 3): print("no spritesheet");  return
 
 		self._renderingBuffer_ = pygame.Surface((self.width, self.height))
 
-		spriteWidth = _spriteSheet_[0][0].get_width()
-		spriteHeight = _spriteSheet_[0][0].get_height()
+		spriteWidth = sprites._pannelSpriteSheet_[0][0].get_width()
+		spriteHeight = sprites._pannelSpriteSheet_[0][0].get_height()
 
 		if float(self.width / spriteWidth) < 1.5: print(float(self.width / spriteWidth)); return
 		if float(self.height / spriteHeight) < 1.5: print(float(self.height / spriteHeight)); return
@@ -42,16 +40,16 @@ class Pannel(Component):
 
 		for i in range(1,tiledWidth):
 			for j in range(1,tiledHeight):
-				self._renderingBuffer_.blit(_spriteSheet_[1][1], (i*spriteWidth,j*spriteHeight))
+				self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[1][1], (i*spriteWidth,j*spriteHeight))
 
 		for i in range(1,tiledWidth):
-			self._renderingBuffer_.blit(_spriteSheet_[0][1], (i*spriteWidth,0))
-			self._renderingBuffer_.blit(_spriteSheet_[2][1], (i*spriteWidth,self.height-spriteHeight))
+			self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[0][1], (i*spriteWidth,0))
+			self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[2][1], (i*spriteWidth,self.height-spriteHeight))
 		for j in range(1,tiledHeight):
-			self._renderingBuffer_.blit(_spriteSheet_[1][0], (0,j*spriteHeight))
-			self._renderingBuffer_.blit(_spriteSheet_[1][2], (self.width - spriteWidth,j*spriteHeight))
+			self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[1][0], (0,j*spriteHeight))
+			self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[1][2], (self.width - spriteWidth,j*spriteHeight))
 
-		self._renderingBuffer_.blit(_spriteSheet_[0][0], (0,0))
-		self._renderingBuffer_.blit(_spriteSheet_[0][2], (self.width-spriteWidth,0))
-		self._renderingBuffer_.blit(_spriteSheet_[2][0], (0,self.height-spriteHeight))
-		self._renderingBuffer_.blit(_spriteSheet_[2][2], (self.width-spriteWidth,self.height-spriteHeight))
+		self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[0][0], (0,0))
+		self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[0][2], (self.width-spriteWidth,0))
+		self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[2][0], (0,self.height-spriteHeight))
+		self._renderingBuffer_.blit(sprites._pannelSpriteSheet_[2][2], (self.width-spriteWidth,self.height-spriteHeight))

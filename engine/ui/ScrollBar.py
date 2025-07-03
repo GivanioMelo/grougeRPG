@@ -45,7 +45,7 @@ class ScrollBar(Component):
     """
     Custom scroll bar.
 
-    Initialization parameters (kwargs):
+    Initialization parameters:
         x (int, optional): X position of the scroll bar. Default: 0.
         y (int, optional): Y position of the scroll bar. Default: 0.
         lenght (int, optional): Length of the scroll bar (height if vertical, width if horizontal). Default: 100.
@@ -54,35 +54,62 @@ class ScrollBar(Component):
         value (int/float, optional): Initial scroll value. Default: 0.
         orientation (int, optional): Bar orientation (VERTICAL=0, HORIZONTAL=1). Default: VERTICAL.
     """
-    def __init__(self,**kwargs):
-        self.x = kwargs.get('x', 0)
-        self.y = kwargs.get('y', 0)
-        
-        self.lenght = kwargs.get('lenght', 100) -12
+    def __init__(self,x=0, y=0, lenght=100, minValue=0, maxValue=100, value=0, orientation=VERTICAL):
+        super().__init__(x=x, y=y, width=12, height=12)
+        self.lenght = lenght -12
 
-        self.minValue = kwargs.get('minValue', 0)
-        self.maxValue = kwargs.get('maxValue', 100)
-        self.value = kwargs.get('value', 0)
+        self.minValue = minValue
+        self.maxValue = maxValue
+        self.value = value
 
         if self.value < self.minValue: self.value = self.minValue
         if self.value > self.maxValue: self.value = self.maxValue
 
-        self.orientation = kwargs.get('orientation', VERTICAL)
+        self.orientation = orientation
         self.cursorButton = ScrollBarCursorButton(self.x,self.y)
 
         if self.orientation == VERTICAL:
             self.width = 12
             self.height = self.lenght+12
             self.startButton = v_ScrollBarStartButton(self.x, self.y)
-            self.endButton = v_ScrollBarEndButton(self.x, self.y + self.lenght - 12)
+            self.endButton = v_ScrollBarEndButton(self.x, self.y + self.lenght)
             self.backGroundTexture = _v_scroll_texture_
         else:
             self.height = 12
             self.width = self.lenght+12
             self.startButton = h_ScrollBarStartButton(self.x, self.y)
-            self.endButton = h_ScrollBarEndButton(self.x + self.lenght - 12, self.y)
+            self.endButton = h_ScrollBarEndButton(self.x + self.lenght, self.y)
             self.backGroundTexture = _h_scroll_texture_
     
+    def setLenght(self, lenght):
+        self.lenght = lenght - 12
+        if self.orientation == VERTICAL:
+            self.width = 12
+            self.height = self.lenght+12
+            self.startButton.x = self.x
+            self.startButton.y = self.y
+            self.endButton.x = self.x
+            self.endButton.y = self.y + self.lenght
+        else:
+            self.height = 12
+            self.width = self.lenght+12
+            self.startButton.x = self.x
+            self.startButton.y = self.y
+            self.endButton.x = self.x + self.lenght
+            self.endButton.y = self.y
+
+    def set_height(self, value):
+        if value < 12: value = 12
+        self.height = value
+        if self.orientation == VERTICAL:
+            self.endButton.y = self.y + self.lenght
+    
+    def set_width(self, value):
+        if value < 12: value = 12
+        self.width = value
+        if self.orientation == HORIZONTAL:
+            self.endButton.x = self.x + self.lenght
+
     def update(self):
         self.startButton.update()
         self.endButton.update()

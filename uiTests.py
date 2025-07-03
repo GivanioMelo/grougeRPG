@@ -25,10 +25,9 @@ pannels.append(Pannel(x=90,y=70,width=70,height=50))
 pannels.append(Pannel(x=10,y=130,width=150,height=50))
 
 windows = []
-windows.append(Window(x=10,y=10,width=150,height=150,vScrollBar=True,hScrollBar=False))
 windows.append(Window(x=450,y=10,width=150,height=150,vScrollBar=False,hScrollBar=True))
-windows.append(Window(x=450,y=180,width=90,height=70,vScrollBar=True,hScrollBar=True))
-windows.append(Window(x=600,y=180,width=50,height=90,vScrollBar=True,hScrollBar=False))
+windows.append(Window(x=450,y=180,width=150,height=100,vScrollBar=True,hScrollBar=True))
+windows.append(Window(x=450,y=290,width=300,height=150,vScrollBar=True,hScrollBar=False))
 
 windows.append(TextWindow(170,10,text="Hello\nWelcome to Quests\nThis is my very first game...", title="Message"))
 windows.append(InventoryWindow(170,90,4,4, title="Chest"))
@@ -46,8 +45,8 @@ buttons.append(ToggleButton(720,30))
 buttons.append(ToggleButton(720,50))
 buttons.append(ToggleButton(720,70))
 
-hsb = ScrollBar(10,550,700,HORIZONTAL)
-vsb = ScrollBar(750,10,500,VERTICAL)
+hsb = ScrollBar(10,550,700,orientation=HORIZONTAL)
+vsb = ScrollBar(900,10,500,orientation=VERTICAL)
 
 mouseButtons = pygame.mouse.get_pressed()
 
@@ -55,23 +54,12 @@ def update():
 	running = True
 	events = pygame.event.get() 
 	for event in events:
-		# if event.type == pygame.MOUSEBUTTONDOWN:
 		if event.type == pygame.QUIT: running = False
 
 	for w in windows: w.update()
 	for b in buttons: b.update()
 	hsb.update()
 	vsb.update()
-	# global mouseButtons
-	# if (not mouseButtons[0]):
-	# 	mouseButtons = pygame.mouse.get_pressed()
-	# 	if(mouseButtons[0]):
-	# 		mousePosition = pygame.mouse.get_pos()
-	# 		mouseMovement = pygame.mouse.get_rel()
-	# 		print(f"mousePosition:({mousePosition})\t mouse moviment:({mouseMovement})")
-	# else:
-	# 	mouseButtons = pygame.mouse.get_pressed()
-
 	return running
 
 def draw():

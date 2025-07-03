@@ -16,8 +16,8 @@ def load(imagePath, rows, cols):
 	return sheet
 
 _buttonSpriteSheet_ = load("assets/ui/buttons_12x12.png",6,8)
-# _pannelSpriteSheet_= load("assets/ui/PanelTemplate.png",3,3)
-# _windowSpriteSheet_ = load("assets/ui/windowTexture.png",3,3)
+_pannelSpriteSheet_= load("assets/ui/PanelTemplate.png",3,3)
+_windowSpriteSheet_ = load("assets/ui/windowTexture.png",3,3)
 
 defaultButton = _buttonSpriteSheet_[0][0]
 defaultButton_pressed = _buttonSpriteSheet_[1][0]
